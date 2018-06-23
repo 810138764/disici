@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<link rel="stylesheet" type="text/css" href="styles/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="styles/public.css">
+	<link rel="stylesheet" type="text/css" href="styles/index.css">
+	<link rel="stylesheet" type="text/css" href="styles/laydate.css">
+	<script type="text/javascript" src="scripts/lib/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="scripts/lib/angular.js"></script>
+	<script type="text/javascript" src="scripts/lib/angular-route.min.js"></script>
+	<!-- <script type="text/javascript" src="scripts/lib/angular-ui-router.min.js"></script> -->
+</head>
+<body ng-cloak>
+<div ng-controller="gonggao"><tanchuan name="mmj"></tanchuan></div>
+<div ng-controller="weituo"><tanchuan name="weituo"></tanchuan></div>
+<div class="layout_body">
+   <header  id="header">
+   	    <div class="header__top">
+   	    	<div class="container">
+   	    			<!-- 顶部滚动条 -->
+   	    		<div class="Rollingnew fl" ng-controller="scroll_bar">
+						<div class="newbox">
+							<div class="timelySection-item" ng-repeat="s in daddiv">
+								<div class="timely-name fl">{{s.name | uppercase}}/CNY</div>
+								<div class="timely-value red fl" ng-class="{'red':{{s.up}}=='0','lv':{{s.up}}=='1'}">{{s.price}}</div>
+								<i class="iconfont icon-arrow-bottom fl" ng-class="{'icon-arrow-bottom':{{s.up}}=='0','icon-arrow-top':{{s.up}}=='1','red':{{s.up}}=='0','down':{{s.up}}=='0','up':{{s.up}}=='1','lv':{{s.up}}=='1'}"></i>
+							</div>
+						</div>	
+				</div> 
+				<div class="fr loginbox" ng-controller="loginbox">
+   	    			<div class="login" id="login_button" ng-show='login'>
+   	    				<a class="dropdowlogin logina" ng-click="activeTab=1">
+   	    					<i class="iconfont icon-dengluyonghuming"></i>
+   	    					<span>登录</span>
+   	    				</a>
+   	    				<div id="login_box" class="lobo" ng-show='activeTab==1'>
+							<h5>登录</h5>
+							<div class="card__body">
+								<div class="form-group">
+									<label>手机号</label>
+								    <input class="form-control" type="text" placeholder="手机号">
+								</div>
+								<div class="form-group">
+									<label>密码</label>
+								    <input class="form-control" type="password" placeholder="密码">
+								</div>
+								<div class="form-group Verification">
+									<label>验证码</label>
+								    <input class="form-control" type="text" placeholder="验证码">
+								    <div class="verimg">
+								    	<img src="images/c6.png">
+								    </div>
+								</div>
+								<div class="card__footer">
+									<a class="Submit btn">登录</a>
+								</div>
+								<div class="register">
+							        <a href="javascript:void(0)">忘记密码?</a>
+							    </div>
+							</div>
+							<i class="iconfont icon-guanbi"></i>
+						</div>
+   	    			</div>
+   	    			<div class="login" id="registeredbntbox" ng-show='login'>
+   	    				<a class="logina" ng-click="activeTab=2">
+   	    					<i class="iconfont icon-tianjiayonghu"></i>
+   	    					<span>注册</span>
+   	    				</a>
+   	    				<div id="registeredbnt" class="lobo" ng-show='activeTab==2'>
+							<h5>注册</h5>
+							<div class="card__body">
+								<div class="form-group">
+									<label>手机号</label>
+								    <input class="form-control" type="text" placeholder="手机号">
+								</div>
+								<div class="form-group">
+									<label>密码</label>
+								    <input class="form-control" type="password" placeholder="密码">
+								</div>
+								<div class="form-group Verification">
+									<label>验证码</label>
+								    <input class="form-control" type="text" placeholder="验证码">
+								    <div class="verimg">
+								    	<img src="images/c6.png">
+								    </div>
+								</div>
+								<div class="card__footer">
+									<a class="Submit btn">注册</a>
+								</div>
+								<div class="register">
+							        <a href="#password">忘记密码?</a>
+							    </div>
+							</div>
+							<i class="iconfont icon-guanbi"></i>
+						</div>
+   	    			</div>
+   	    			<div class="login" id="navdaohanbox" ng-hide='login' ng-mouseenter="showtimesc = true" ng-mouseleave="showtimesc = false">
+   	    				  <a href="javascript:void(0)" class="logina">
+   	    					<i class="vip iconfont icon-vip{{vip}}" ng-class="{'rzvip':{{vip}}>='1'}"></i>
+   	    					<span ng-bind="idname"></span>
+   	    					<i class="iconfont icon-htmal5icon03"></i>
+   	    				 </a>
+   	    				 <div class="lobo loboassets" ng-show="showtimesc"><!-- ng-show="showtimesc" -->
+   	    				 	  <div class="assetsbox">
+			                     <h2>资产折合</h2>
+			                     <a class="exit red" ng-click="exit()"><i class="iconfont icon-guanbi1"></i></a>
+			                     <div class="assets">总资产:<span class="zs">￥632432.63</span>CNY</div>
+			                     <div class="assets">净资产:<span class="zs">￥662432.63</span>CNY</div>
+			                  </div>
+			                  <div class="Top_assets">
+			                  	   <table>
+				                  	   	 <thead>
+					                  	   	  <tr>
+					                  	   	  	<th width="120px">币种</th>
+					                  	   	  	<th width="120px">数量</th>
+					                  	   	  	<th width="120px">冻结</th>
+					                  	   	  </tr>
+				                  	   	</thead>
+				                  	   	 <tbody>
+					                  	   	    <tr ng-repeat="bt in assets">
+					                               <td class="Pict">
+					                                   <span ng-bind="bt.name  | uppercase"></span>
+					                               </td>
+					                               <td class="number"><span class="zs" ng-bind="bt.price"></span></td>
+					                               <td class="number"><span class="zs" ng-bind="bt.pricedj"></span></td>
+					                            </tr>
+			                  	  		 </tbody>
+			                  	   </table>
+			                  </div>
+			                  <div class="top_bnt submit">
+			                  	   <a class="fl" href="#assets?a=2" ng-click='active(2)'>充值</a>
+			                  	   <a class="fr" href="#assets?a=3" ng-click='active(3)'>提现</a>
+			                  </div>
+   	    				 </div>
+   	    			</div>
+   	    			<div class="login" id="navdaohanbox" ng-hide='login' ng-mouseenter="showtimes = true" ng-mouseleave="showtimes = false">
+   	    				  <a href="javascript:void(0)" class="logina">
+   	    					<span>网站导航</span>
+   	    					<i class="iconfont icon-ai238"></i>
+   	    				 </a>
+   	    				  <div id="navdaohan" class="lobo" ng-show="showtimes">
+   	    				 	 <dl>
+   	    				 	 	<!-- <dt>财务中心</dt> -->
+   	    				 	 	<dd><a href="#assets?a=1"  ng-click='active(1)'>账户信息</a></dd>
+   	    				 	 	<dd><a href="#informa?a=11"  ng-click='active(11)'>基本信息</a></dd>
+   	    				 	 	<dd><a href="#informa?a=12"  ng-click='active(12)'>安全设置</a></dd>
+   	    				 	 	<dd><a href="#security?a=6" ng-click='active(6)'>身份认证</a></dd>
+   	    				 	 	<dd><a href="#security?a=7" ng-click='active(7)'>手机认证</a></dd>
+   	    				 	 	<dd><a href="#security?a=8" ng-click='active(8)'>邮箱认证</a></dd>
+   	    				 	 	<dd><a href="#security?a=9" ng-click='active(9)'>API设置</a></dd>
+   	    				 	 </dl>
+   	    				 </div>
+   	    			</div>
+   	    			<div class="bannerbefore fr" ng-mouseenter="showtim = true" ng-mouseleave="showtim = false">
+		   	    			<a href="###" class="ov  language">
+		   	    				<img  class="cn" src="images/cn.jpg">
+		   	    			</a>
+		   	    			<ul class="languagebox" ng-show="showtim">
+		   	    				<li>
+		   	    					<a href="###">
+		   	    						<img src="images/cn.jpg">
+		   	    						<span>简体中文</span>           
+		   	    					</a>
+		   	    				</li>
+		   	    				<li>
+		   	    					<a href="###">
+		   	    						<img src="images/hk.png">
+		   	    						<span>繁体中文</span>
+		   	    					</a>
+		   	    				</li>
+		   	    				<li>
+		   	    					<a href="###">
+		   	    						<img src="images/En.png">
+		   	    						<span>English</span>
+		   	    					</a>
+		   	    				</li>
+		   	    			</ul>
+   	    			</div>
+   	    		</div>
+   	    	</div>
+   	    </div>
+   </header>
+   <div class="jdh_indexnavbox">
+   	   <a href=javascript:void(0) class="fl logo">
+   	      <img src="images/logo.png">
+   	   </a>
+   	   <ul class="fr navbox">
+   	   	  <li>
+   	   	  	<a href="#home">
+   	   	  		<span>网站首页</span>
+   	   	  		<!-- <p class="jdh_indexnavptwo">Home</p> -->
+   	   	  	</a>
+   	   	  </li>
+   	   	  <li class="jyzx">
+   	   	  	<a href="#Centrer">
+   	   	  		<span>交易中心</span>
+   	   	  		<i class="iconfont icon-htmal5icon03"></i>
+   	   	  		<!-- <p class="jdh_indexnavptwo">Trading Center</p> -->
+   	   	  	</a>
+   	   	  	<div class="drop-down">
+   	   	  		<div class="posiTion"> 
+	   	   	  		 <div class="downlistbox">
+		   	   	  		 <dl class="ov hbnav">
+		   	   	  		 	<dd class="actiw">CNY</dd>
+		   	   	  		 	<dd>USDT</dd>
+		   	   	  		 	<dd>BTC</dd>
+		   	   	  		 	<dd>ETH</dd>
+		   	   	  		 </dl>
+		   	   	  		 <div class="market_box disbolck">
+		   	   	  		 	 <div class="market_list" ng-controller="market_list_1">
+			   	   	  		 	 <p>主流交易区：</p>
+			   	   	  		 	 <dl class="ov">
+			   	   	  		 	 	<dt ng-repeat="x in dadadt">
+			   	   	  		 	 		<a ng-href="{{x.url}}">
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img  ng-src="{{x.img}}">
+				   	   	  		 	 			<span>{{x.name  | uppercase}}</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 	
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 </dl>
+			   	   	  		 	 <p>创新交易区：</p>
+			   	   	  		 	 <dl class="ov">
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 	<dt>
+			   	   	  		 	 		<a>
+				   	   	  		 	 		<div class="single fl ov">
+				   	   	  		 	 			<img src="images/btc.png">
+				   	   	  		 	 			<span>BTC</span>
+				   	   	  		 	 		</div>
+				   	   	  		 	 		<p>／CNY</p>
+				   	   	  		 	 		<i class="iconfont icon-gupiao"></i>
+			   	   	  		 	 	   </a>
+			   	   	  		 	 	</dt>
+			   	   	  		 	 </dl>
+			   	   	  		 </div>
+		   	   	  		 </div>
+		   	   	  		 <div class="market_box">
+		   	   	  		   功能正在开发中..
+		   	   	  		 </div>
+		   	   	  		 <div class="market_box">
+		   	   	  		 	功能正在开发中..
+		   	   	  		 </div>
+		   	   	  		 <div class="market_box">
+		   	   	  		 	功能正在开发中..
+		   	   	  		 </div>
+	   	   	  		 </div>
+	   	   	  	  	<div class="this"></div>
+               </div>
+   	   	  	</div>
+   	   	  </li>
+          <li>
+          	<a href="K_line.html">
+   	   	  		<span>K线走势</span>
+   	   	  		<!-- <p class="jdh_indexnavptwo">Trend Chart</p> -->
+   	   	  	</a>
+          </li>
+         <!--  <li>
+   	   	  	<a>
+   	   	  		<span>新币投票</span>
+   	   	  		<p class="jdh_indexnavptwo">new Vote</p>
+   	   	  	</a>
+          </li> -->
+          <li>
+   	   	  	<a href="#news">
+   	   	  		<span>新闻中心</span>
+   	   	  		<!-- <p class="jdh_indexnavptwo">News center</p> -->
+   	   	  	</a>
+          </li>
+          <!--  <li>
+   	   	  	<a href="#news=9">
+   	   	  		<span>新手指导</span>
+   	   	  		<p class="jdh_indexnavptwo">News center</p>
+   	   	  	</a>
+          </li> -->
+   	   </ul>
+   </div>
+</div>
+<div ng-view></div> 
+<footer id="footer">
+	 <div class="bottomcontainer">
+	 	   <div class="containerRow">
+	 	   		<dl class="fl">
+	 	   	   	   <dt>关于平台</dt>
+	 	   	   	   <dd>公司简介</dd>
+	 	   	   	   <dd>发展团队</dd>
+	 	   	   	   <dd>商务合作</dd>
+	 	   	   </dl>
+	 	   	   <dl class="fl">
+	 	   	   	   <dt>下载支持</dt>
+	 	   	   	   <dd>API文档</dd>
+	 	   	   	   <dd>APP下载</dd>
+	 	   	   	   <dd>其它下载</dd>
+	 	   	   </dl>
+	 	   	   <dl class="fl">
+	 	   	   	   <dt>客户服务</dt>
+	 	   	   	   <dd>数字资产充值</dd>
+	 	   	   	   <dd>数字资产提现</dd>
+	 	   	   	   <dd>人民币提现</dd>
+	 	   	   	   <dd>实名认证</dd>
+	 	   	   	   <dd>服务协议</dd>
+	 	   	   	   <dd>交易费率</dd>
+	 	   	   </dl>
+	 	   	   <dl class="fl">
+	 	   	   	   <dt>联系我们</dt>
+	 	   	   	   <dd>大客戶專線：15211131161</dd>
+	 	   	   	   <dd>投诉電郵：vip@ceo.bi</dd>
+	 	   	   	   <dd>业务邮箱：info@zb.com</dd>
+	 	   	   </dl>
+	 	   </div>
+	 </div>
+	 <div class="yqlj">
+	 	   <h2>友情链接:</h2>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/BTC123.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/Bitkan.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/8btc.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/ETC.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/ETHFANS.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/AIcoin.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/BOTVS.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/JINSE.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/COLDLAR.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/CHAINFOR.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/FEIXIAOHAO.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/QIANKE.png"></a>
+	 	   <a href="#"><img src="https://s.zb.com/statics/img/v3/links/anybitlogo.png"></a>
+	 </div>
+</footer>
+<script type="text/javascript" src="scripts/public.js"></script>
+	<script type="text/javascript" src="scripts/index.js"></script>
+<script type="text/javascript" src="scripts/laydate.js"></script>	
+<script type="text/javascript">
+	var html='尊敬的用户：香港CEO交易所将于香港时间2018年06月08日11:18启动投票上币机制，经运营团队核心成员筛选，审核，参与投票币种如下：（排名不分先后）'
+	         +'<p>第一名：在CEO交易所免费上线交易 </p><p>第二名：支付20000       Coo币上线；</p><p>第三名：支付30000       Coo币上线；</p>'
+	         +'<p>第四名：支付50000       Coo币上线；</p><p>第五名：支付80000       Coo币上线 。</p>'
+$(function(){
+	 $('#weituo').playsee( {
+        bnt :0,
+        content:html,
+        Poptitle:'最新公告',
+        width:'1000px',
+        height:'300px',
+        top:"25%"
+     });        
+})
+$(document).on('click','.operation',function(e){
+     $('#clakdid').playsee( {
+        bnt :1,
+        content:'是否取消委托？',
+        Poptitle:'标题'
+        //width:'500pxp',
+        //height:'300px',
+     });         
+});  
+</script>
+</body>
+</html>
